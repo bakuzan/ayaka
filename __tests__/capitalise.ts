@@ -1,4 +1,4 @@
-import * as fns from '../lib/capitalise';
+import * as fns from '../lib';
 
 describe('capitalise', () => {
   it('should capitalise a string', () => {

@@ -25,6 +25,8 @@
     "pretty": "lint-staged",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "test": "npx jest",
+    "test-w": "npx jest --watch",
+    "coverage": "npx jest --coverage",
     "bundle": "rollup -c",
     "build": "tsc --build",
     "build-all": "npm run bundle && npm run build"

@@ -10,3 +10,4 @@ out*
 *.scss.json
 modules
 .out
+coverage
