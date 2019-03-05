@@ -1,4 +1,5 @@
-import { isObject, isArray } from './isTypeOf';
+import isArray from './isArray';
+import isObject from './isObject';
 
 export default function objectsAreEqual(o1: object, o2: object): boolean {
   if (!isObject(o1) || !isObject(o2)) {

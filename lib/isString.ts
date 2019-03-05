@@ -1,4 +1,5 @@
 import Types from './constants/types';
-import { isTypeOf } from './isTypeOf';
+import isTypeOf from './isTypeOf';
 
-export const isString = isTypeOf(Types.string);
+const isString = isTypeOf(Types.string);
+export default isString;

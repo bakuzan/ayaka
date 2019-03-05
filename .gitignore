@@ -1,6 +1,7 @@
 
 .DS_Store
 dist
+build
 *.css
 node_modules
 *.log

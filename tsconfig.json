@@ -19,5 +19,5 @@
     "lib": ["es2017", "dom"]
   },
   "include": ["lib/**/*"],
-  "exclude": ["node_modules", "dist", "modules", "tools", "test"]
+  "exclude": ["node_modules", "dist", "build", "modules", "tools", "__tests__"]
 }

@@ -1,4 +1,4 @@
-import areEqual from './areEqual';
+import areEqual from './datesAreEqual';
 import getDatesAsMsAtMidnight from './getDatesAsMsAtMidnight';
 
 export const isBefore = (

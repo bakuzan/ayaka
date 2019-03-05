@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "description": "Function Library",
-  "main": "dist/bundle.min.js",
+  "main": "build/index.min.js",
   "files": [
     "dist"
   ],
   "lint-staged": {
-    "{,lib,tools,test}/**/*.{ts,tsx,js,jsx,json}": [
+    "{,lib,tools,__tests__}/**/*.{ts,tsx,js,jsx,json}": [
       "prettier --single-quote --write",
       "git add"
     ]
@@ -16,14 +16,15 @@
   "pre-commit": [
     "precommit-msg",
     "lint-ts",
-    "lint"
+    "lint",
+    "test"
   ],
   "scripts": {
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "lint-ts": "tslint -c tslint.json 'lib/**/*.{ts,tsx}'",
     "lint": "lint-staged",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx jest",
     "bundle": "rollup -c",
     "build": "tsc --build",
     "build-all": "npm run bundle && npm run build"

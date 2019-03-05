@@ -1,5 +1,7 @@
 import '@babel/register';
 import dotenv from 'dotenv';
+import fse from 'fs-extra';
+import path from 'path';
 
 import replace from 'rollup-plugin-replace';
 import resolve from 'rollup-plugin-node-resolve';
@@ -10,28 +12,32 @@ import includePaths from 'rollup-plugin-includepaths';
 import ts from 'rollup-plugin-typescript';
 import typescript from 'typescript';
 
+import debugPlugin from './tools/debugPlugin';
+
 import pkg from './package.json';
 
 dotenv.config();
 
 const isProduction = process.env.NODE_ENV === 'production';
-const entry = 'lib/index.ts';
 const extensions = ['.ts', '.tsx'];
 
-export default [
-  {
-    input: entry,
-    output: {
-      name: 'bundle',
-      file: pkg.main,
-      format: 'cjs',
-      globals: globals,
-      sourceMap: isProduction
-    },
-    external: externals,
-    plugins: rollupPlugins()
-  }
-];
+function readFileNamesFor(dir, prefix) {
+  return fse
+    .readdirSync(dir)
+    .filter((x) => x.endsWith('.ts'))
+    .map((x) => `${prefix}${x}`);
+}
+
+function getInputFiles() {
+  const libDir = path.join(__dirname, './lib/');
+  const constantsDir = path.join(libDir, './constants');
+  const files = [
+    ...readFileNamesFor(libDir, 'lib/'),
+    ...readFileNamesFor(constantsDir, 'lib/constants/')
+  ];
+  files.forEach((x) => console.log(x));
+  return files;
+}
 
 function rollupPlugins() {
   return [
@@ -56,6 +62,7 @@ function rollupPlugins() {
       runtimeHelpers: true,
       extensions
     }),
+    debugPlugin(),
     commonjs(),
     isProduction &&
       uglify({
@@ -76,3 +83,16 @@ function rollupPlugins() {
       })
   ];
 }
+
+export default [
+  {
+    input: [getInputFiles()],
+    output: {
+      name: 'bundle',
+      file: pkg.main,
+      format: 'cjs',
+      sourceMap: isProduction
+    },
+    plugins: rollupPlugins()
+  }
+];
