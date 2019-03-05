@@ -7,23 +7,16 @@ import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
 import includePaths from 'rollup-plugin-includepaths';
-import autoprefixer from 'autoprefixer';
-import postcss from 'rollup-plugin-postcss';
 import ts from 'rollup-plugin-typescript';
 import typescript from 'typescript';
 
 import pkg from './package.json';
 
 dotenv.config();
+
 const isProduction = process.env.NODE_ENV === 'production';
 const entry = 'lib/index.ts';
-const externals = ['react', 'react-dom', 'prop-types'];
-const globals = {
-  react: 'React',
-  'react-dom': 'ReactDOM',
-  'prop-types': 'PropTypes'
-};
-const extensions = ['.js', '.ts', '.tsx', '.scss'];
+const extensions = ['.ts', '.tsx'];
 
 export default [
   {
@@ -54,14 +47,6 @@ function rollupPlugins() {
     resolve({
       main: true,
       preferBuiltins: false
-    }),
-    postcss({
-      extract: 'dist/bundle.min.css',
-      sourceMap: true,
-      minimize: isProduction ? { safe: true } : false,
-      extensions: ['.scss'],
-      use: ['sass'],
-      plugins: [autoprefixer]
     }),
     ts({
       typescript
