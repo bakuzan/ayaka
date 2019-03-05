@@ -4,13 +4,12 @@
       "@babel/preset-env",
       {
         "targets": {
-          "browsers": ["last 2 versions", "not ie <= 11"]
+          "browsers": ["last 2 versions", "not ie <= 11", "not dead"]
         },
         "modules": false
       }
     ],
-    "@babel/preset-typescript",
-    "@babel/preset-react"
+    "@babel/preset-typescript"
   ],
   "plugins": [
     "@babel/plugin-proposal-export-default-from",
