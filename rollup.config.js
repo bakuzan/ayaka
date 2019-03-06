@@ -18,7 +18,8 @@ const isProduction = process.env.NODE_ENV === 'production';
 const extensions = ['.ts', '.tsx'];
 const input = 'lib/index.ts';
 
-function rollupPlugins() {
+function rollupPlugins(options = {}) {
+  const { isBrowser = false } = options;
   return [
     replace({
       ['process.env.NODE_ENV']: JSON.stringify('production')
@@ -31,6 +32,7 @@ function rollupPlugins() {
     }),
     resolve({
       main: true,
+      browser: isBrowser,
       preferBuiltins: false
     }),
     ts({
@@ -72,5 +74,15 @@ export default [
       sourceMap: isProduction
     },
     plugins: rollupPlugins()
+  },
+  {
+    input,
+    output: {
+      name: 'ayaka',
+      file: pkg.browser,
+      format: 'iife',
+      sourceMap: isProduction
+    },
+    plugins: rollupPlugins({ isBrowser: true })
   }
 ];

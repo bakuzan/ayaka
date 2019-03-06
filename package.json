@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "description": "Function Library",
-  "main": "build/index.min.js",
+  "main": "dist/index.min.js",
+  "browser": "dist/ayaka.min.js",
+  "module": "dist/module.min.js",
   "files": [
     "dist"
   ],
@@ -67,5 +69,8 @@
     "tslint": "^5.13.1",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.3.3333"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.3.4"
   }
 }

@@ -5,7 +5,7 @@
     "paths": {
       "*": ["lib/*"]
     },
-    "outDir": "./dist",
+    "outDir": "./build",
     "sourceMap": true,
     "declaration": true,
     "allowJs": false,

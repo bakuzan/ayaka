@@ -5,7 +5,7 @@ const generateUniqueId = (): string =>
     const c: number = Number(s);
     return (
       c ^
-      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+      (window.crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
     ).toString(16);
   });
 
