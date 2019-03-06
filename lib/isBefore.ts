@@ -7,10 +7,6 @@ export const isBefore = (
 ) => {
   const [dx, dy] = getDatesAsMsAtMidnight(d1, d2);
   const before = dx < dy;
-  const dd = new Date(d1);
-  if (dd.getMonth() === 5 && dd.getDate() === 2) {
-    console.log(d1, d2, `First is before Second ? : ${before}`);
-  }
   return before;
 };
 

@@ -3,8 +3,17 @@ import * as fns from '../lib';
 describe('debounce', () => {
   let result = null;
 
+  function checkTimeoutCalled() {
+    expect(setTimeout).toHaveBeenCalledTimes(1);
+    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 1000);
+  }
+
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
   afterEach(() => {
-    clearTimeout(result);
+    jest.clearAllTimers();
   });
 
   it('should return timeout id', () => {
@@ -12,23 +21,28 @@ describe('debounce', () => {
 
     result = fns.debounce(() => {}, 1000);
 
+    checkTimeoutCalled();
     expect(typeof result).toEqual(expected);
   });
 
   it('should call function after provided timeout', () => {
-    const expected = new Date().getTime() + 1000;
+    const mockedFn = jest.fn();
 
-    result = fns.debounce(() => {
-      expect(new Date().getTime()).toEqual(expected);
-    }, 1000);
+    result = fns.debounce(mockedFn, 1000);
+
+    jest.runAllTimers();
+
+    checkTimeoutCalled();
+    expect(mockedFn).toHaveBeenCalled();
   });
 
   it('should cancel timeout if cleared externally', () => {
-    const mockedFn = jest.fn(() => null);
+    const mockedFn = jest.fn();
     result = fns.debounce(mockedFn, 1000);
 
     clearTimeout(result);
 
+    checkTimeoutCalled();
     expect(mockedFn).not.toHaveBeenCalled();
   });
 });
