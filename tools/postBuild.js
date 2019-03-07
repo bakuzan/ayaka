@@ -1,19 +1,36 @@
 const fs = require('fs');
 const path = require('path');
+const execa = require('execa');
 const chalk = require('chalk');
 
 const fileName = 'package.json';
-const projectRoot = path.resolve(__dirname, '../', fileName);
-const buildFolder = path.resolve(__dirname, '../build', fileName);
+const projectRoot = path.resolve(__dirname, '../');
+const buildFolder = path.resolve(__dirname, '../build');
 
 async function copyPackageJson() {
-  fs.copyFile(projectRoot, buildFolder, (err) => {
-    if (err) {
-      throw err;
-    }
+  fs.copyFile(
+    path.resolve(projectRoot, fileName),
+    path.resolve(buildFolder, fileName),
+    (err) => {
+      if (err) {
+        throw err;
+      }
 
-    console.log(chalk.magenta(`${fileName} copied to ${buildFolder}`));
-  });
+      console.log(chalk.magenta(`Copied ${fileName} to ${buildFolder}`));
+    }
+  );
+}
+
+async function babelJS() {
+  await execa.shell(
+    `npx babel ${buildFolder} --out-dir ${buildFolder} --extensions=.js --presets @babel/preset-env --source-maps --env-name "build"`,
+    {
+      stdio: ['pipe', 'pipe', 'inherit']
+    }
+  );
+
+  console.log(chalk.green(`Files in ${buildFolder} transpiled successfully.`));
 }
 
 copyPackageJson();
+babelJS();
