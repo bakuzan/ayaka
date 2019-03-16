@@ -27,9 +27,9 @@ export default class Storage {
     return this.get();
   }
 
-  upgrade(upgradeFn: (data: object) => object) {
+  upgrade(...upgradeFns: Array<(data: object) => object>) {
     const data = this.get();
-    const upgradedData = upgradeFn(data);
+    const upgradedData = upgradeFns.reduce((upD, fn) => fn(upD), data);
     this.replace(upgradedData);
   }
 }

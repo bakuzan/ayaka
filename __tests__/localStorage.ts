@@ -87,4 +87,20 @@ describe('Storage', () => {
     expect(localStorage.setItem).toHaveBeenCalledWith(STORE_KEY, expected);
     expect(localStorage.__STORE__[STORE_KEY]).toBe(expected);
   });
+
+  it('should return upgrade data when passed multiple functions in localStorage', () => {
+    const input = { ...STORE_DEFAULTS, test: 'UPGRADE' };
+    const expected = JSON.stringify({ ...input, value: 2 });
+
+    store.upgrade(
+      () => ({ ...input, value: 1 }),
+      (d: any) => ({ ...d, value: d.value + 1 })
+    );
+
+    const result = store.get();
+
+    expect(result).toEqual({ ...input, value: 2 });
+    expect(localStorage.setItem).toHaveBeenCalledWith(STORE_KEY, expected);
+    expect(localStorage.__STORE__[STORE_KEY]).toBe(expected);
+  });
 });
