@@ -11,7 +11,7 @@ export default class Storage {
     const data =
       JSON.parse(localStorage.getItem(this.storeName)) || this.defaultValue;
 
-    return key ? data[key] : data;
+    return data && key ? data[key] : data;
   }
 
   set(mergeValues: object): object {

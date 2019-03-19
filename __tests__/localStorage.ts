@@ -48,6 +48,14 @@ describe('Storage', () => {
     expect(localStorage.getItem).toHaveBeenCalledWith(STORE_KEY);
   });
 
+  it('should return data when data does not exist', () => {
+    const badStore = new fns.Store('fake', undefined);
+    const result = badStore.get('age');
+
+    expect(result).toEqual(undefined);
+    expect(localStorage.getItem).toHaveBeenCalledWith('fake');
+  });
+
   // Set
   it('should return updated values on set', () => {
     const values = { age: 18 };
