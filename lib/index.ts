@@ -59,6 +59,7 @@ export { default as isObject } from './isObject';
 export { default as isTypeOf } from './isTypeOf';
 export { default as objectsAreEqual } from './objectsAreEqual';
 export { default as padNumber } from './padNumber';
+export { lighten, darken } from './palette';
 export { default as parseIfInt } from './parseIfInt';
 export { default as setTimeForDate } from './setTimeForDate';
 export { default as startOfDay } from './startOfDay';
