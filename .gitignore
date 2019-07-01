@@ -11,3 +11,4 @@ out*
 modules
 .out
 coverage
+docs
