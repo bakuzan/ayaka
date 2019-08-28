@@ -34,4 +34,13 @@ describe('constructObjectFromSearchParams', () => {
 
     expect(typeof result).toEqual(typeof expected);
   });
+
+  it('should not return param if undefined', () => {
+    const expected = {};
+
+    const result = fns.constructObjectFromSearchParams('?team');
+
+    expect(typeof result).toEqual(typeof expected);
+    expect(result.hasOwnProperty('team')).toBe(false);
+  });
 });

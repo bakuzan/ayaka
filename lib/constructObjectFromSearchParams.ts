@@ -14,6 +14,10 @@ const constructObjectFromSearchParams = (searchParam = ''): object =>
     .split('&')
     .reduce((p, c) => {
       const [key, raw] = c.split('=');
+      if (raw === undefined) {
+        return p;
+      }
+
       const value = parseSearchParamValue(raw);
       return { ...p, [key]: value };
     }, {});
