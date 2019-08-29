@@ -62,6 +62,7 @@ export { default as padNumber } from './padNumber';
 export { lighten, darken } from './palette';
 export { default as parseIfInt } from './parseIfInt';
 export { default as setTimeForDate } from './setTimeForDate';
+export { default as shuffleArray } from './shuffleArray';
 export { default as startOfDay } from './startOfDay';
 export { default as Store } from './localStorage';
 export { default as updateSameAsObject } from './updateSameAsObject';

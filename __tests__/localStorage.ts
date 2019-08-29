@@ -1,5 +1,4 @@
 import 'jest-localstorage-mock';
-
 import * as fns from '../lib';
 
 describe('Storage', () => {
@@ -17,13 +16,13 @@ describe('Storage', () => {
 
   // New
   it('should create store instance', () => {
-    const store = new fns.Store(STORE_KEY, {
+    const s = new fns.Store(STORE_KEY, {
       name: 'ayaka',
       age: 17,
       height: 183
     });
 
-    expect(store instanceof fns.Store).toBeTruthy();
+    expect(s instanceof fns.Store).toBeTruthy();
   });
 
   // Get
@@ -34,26 +33,12 @@ describe('Storage', () => {
     expect(localStorage.getItem).toHaveBeenCalledWith(STORE_KEY);
   });
 
-  it('should return value of passed key', () => {
-    const result = store.get('age');
+  // GetKey
+  it('should return key value for stored object', () => {
+    const result = store.getKey('age');
 
     expect(result).toEqual(STORE_DEFAULTS.age);
     expect(localStorage.getItem).toHaveBeenCalledWith(STORE_KEY);
-  });
-
-  it('should return undefined when key does not exist', () => {
-    const result = store.get('pin');
-
-    expect(result).toEqual(undefined);
-    expect(localStorage.getItem).toHaveBeenCalledWith(STORE_KEY);
-  });
-
-  it('should return data when data does not exist', () => {
-    const badStore = new fns.Store('fake', undefined);
-    const result = badStore.get('age');
-
-    expect(result).toEqual(undefined);
-    expect(localStorage.getItem).toHaveBeenCalledWith('fake');
   });
 
   // Set
@@ -72,7 +57,7 @@ describe('Storage', () => {
 
   // Replace
   it('should return replaced values on replace', () => {
-    const input = { test: 'REPLACED' };
+    const input = { name: 'ayaka', age: 18, height: 185 };
     const expected = JSON.stringify(input);
 
     const result = store.replace(input);

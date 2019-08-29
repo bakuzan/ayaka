@@ -8,7 +8,11 @@ const parseSearchParamValue = compose(
   decodeURIComponent
 );
 
-const constructObjectFromSearchParams = (searchParam = ''): object =>
+interface KeyValueObject {
+  [key: string]: any;
+}
+
+const constructObjectFromSearchParams = (searchParam = ''): KeyValueObject =>
   searchParam
     .slice(1)
     .split('&')

@@ -1,35 +1,42 @@
-export default class Storage {
-  private storeName = '';
-  private defaultValue: any = null;
+export default class Store<T> {
+  private storeName: string;
+  private defaultValue: T;
 
-  constructor(storeName: string, defaultValue: object) {
+  constructor(storeName: string, defaultValue: T) {
     this.storeName = storeName;
     this.defaultValue = defaultValue;
   }
 
-  get(key?: string): object {
-    const data =
-      JSON.parse(localStorage.getItem(this.storeName)) || this.defaultValue;
+  public get(): T {
+    const item = localStorage.getItem(this.storeName) || '';
+    const data = (item ? JSON.parse(item) : this.defaultValue) as T;
 
-    return data && key ? data[key] : data;
+    return { ...this.defaultValue, ...data };
   }
 
-  set(mergeValues: object): object {
+  public getKey(key: keyof T): T[keyof T] {
+    const item = localStorage.getItem(this.storeName) || '';
+    const data = (item ? JSON.parse(item) : this.defaultValue) as T;
+
+    return data[key] || this.defaultValue[key];
+  }
+
+  public set(mergeValues: Partial<T>): T {
     const values = this.get();
-    const updated = { ...values, ...mergeValues };
+    const updated: T = { ...values, ...mergeValues };
     localStorage.setItem(this.storeName, JSON.stringify(updated));
     return updated;
   }
 
-  replace(newValue: object): object {
+  public replace(newValue: T): T {
     const data = JSON.stringify(newValue);
     localStorage.setItem(this.storeName, data);
-    return this.get();
+    return this.get() as T;
   }
 
-  upgrade(...upgradeFns: Array<(data: object) => object>) {
+  public upgrade(...upgradeFns: Array<(data: Partial<T>) => Partial<T>>) {
     const data = this.get();
     const upgradedData = upgradeFns.reduce((upD, fn) => fn(upD), data);
-    this.replace(upgradedData);
+    this.replace(upgradedData as T);
   }
 }
