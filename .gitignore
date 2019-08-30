@@ -12,3 +12,4 @@ modules
 .out
 coverage
 docs
+*.tgz

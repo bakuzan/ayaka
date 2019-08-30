@@ -6,7 +6,8 @@
         "targets": {
           "browsers": ["last 2 versions", "not ie <= 11", "not dead", "> 5%"]
         },
-        "modules": false
+        "modules": false,
+        "loose": true
       }
     ],
     "@babel/preset-typescript"

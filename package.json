@@ -1,14 +1,10 @@
 {
-  "name": "ayaka",
+  "name": "bkz-ayaka",
   "version": "1.0.0",
-  "private": true,
-  "description": "Function Library",
+  "description": "Bakuzan's Function Library",
   "main": "index.js",
-  "browser": "dist/ayaka.min.js",
-  "module": "dist/module.min.js",
   "files": [
-    "build",
-    "dist"
+    "build/"
   ],
   "lint-staged": {
     "{,lib,tools,__tests__}/**/*.{ts,tsx,js,jsx,json}": [
@@ -35,7 +31,8 @@
     "build-all": "npm run bundle && npm run build",
     "docs": "typedoc --out docs lib",
     "disable-jekyll": "touch ./docs/.nojekyll",
-    "deploy": "rmdir /s /q docs && npm run docs && npm run disable-jekyll && gh-pages --dotfiles -d docs"
+    "deploy": "rmdir /s /q docs && npm run docs && npm run disable-jekyll && gh-pages --dotfiles -d docs",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "function library"

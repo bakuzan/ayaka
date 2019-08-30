@@ -32,5 +32,5 @@ async function babelJS() {
   console.log(chalk.green(`Files in ${buildFolder} transpiled successfully.`));
 }
 
-copyPackageJson();
+// copyPackageJson();
 babelJS();
