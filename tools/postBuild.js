@@ -7,6 +7,8 @@ const fileName = 'package.json';
 const projectRoot = path.resolve(__dirname, '../');
 const buildFolder = path.resolve(__dirname, '../build');
 
+const args = process.argv.slice(2);
+
 async function copyPackageJson() {
   fs.copyFile(
     path.resolve(projectRoot, fileName),
@@ -32,5 +34,14 @@ async function babelJS() {
   console.log(chalk.green(`Files in ${buildFolder} transpiled successfully.`));
 }
 
-// copyPackageJson();
-babelJS();
+function run() {
+  const includePackageJson = args.includes('--include-package-json');
+
+  if (includePackageJson) {
+    copyPackageJson();
+  }
+
+  babelJS();
+}
+
+run();

@@ -26,13 +26,13 @@
     "test": "npx jest",
     "test:watch": "npx jest -o --watch",
     "test:coverage": "npx jest --coverage",
-    "bundle": "rollup -c",
-    "build": "tsc --build && node ./tools/postBuild.js",
-    "build-all": "npm run bundle && npm run build",
+    "build:bundle": "rollup -c",
+    "build:local": "tsc --build && node ./tools/postBuild.js --include-package-json",
+    "build:npm": "rmdir /s /q build && tsc --build && node ./tools/postBuild.js",
     "docs": "typedoc --out docs lib",
     "disable-jekyll": "touch ./docs/.nojekyll",
     "deploy": "rmdir /s /q docs && npm run docs && npm run disable-jekyll && gh-pages --dotfiles -d docs",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build:npm"
   },
   "keywords": [
     "function library"
@@ -73,7 +73,7 @@
     "tslib": "^1.9.3",
     "tslint": "^5.14.0",
     "tslint-config-prettier": "^1.18.0",
-    "typedoc": "^0.14.2",
+    "typedoc": "^0.15.0",
     "typescript": "^3.3.4000"
   },
   "dependencies": {
