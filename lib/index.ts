@@ -36,6 +36,7 @@ export {
 } from './formatDateTimeForDisplay';
 export { default as formatTime } from './formatTime';
 export { default as fromCamelCase } from './fromCamelCase';
+export { default as guardEvent } from './guardEvent';
 export { default as generateUniqueId } from './generateUniqueId';
 export { default as getDatesAsMsAtMidnight } from './getDatesAsMsAtMidnight';
 export { default as getDayName } from './getDayName';
@@ -61,6 +62,7 @@ export { default as objectsAreEqual } from './objectsAreEqual';
 export { default as padNumber } from './padNumber';
 export { lighten, darken } from './palette';
 export { default as parseIfInt } from './parseIfInt';
+export { default as Router } from './Router';
 export { default as setTimeForDate } from './setTimeForDate';
 export { default as shuffleArray } from './shuffleArray';
 export { default as startOfDay } from './startOfDay';

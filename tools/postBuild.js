@@ -3,13 +3,10 @@ const path = require('path');
 const execa = require('execa');
 const chalk = require('chalk');
 
-const fileName = 'package.json';
 const projectRoot = path.resolve(__dirname, '../');
 const buildFolder = path.resolve(__dirname, '../build');
 
-const args = process.argv.slice(2);
-
-async function copyPackageJson() {
+async function copyRootFile(fileName) {
   fs.copyFile(
     path.resolve(projectRoot, fileName),
     path.resolve(buildFolder, fileName),
@@ -35,13 +32,9 @@ async function babelJS() {
 }
 
 function run() {
-  const includePackageJson = args.includes('--include-package-json');
-
-  if (includePackageJson) {
-    copyPackageJson();
-  }
-
   babelJS();
+  copyRootFile('package.json');
+  copyRootFile('README.md');
 }
 
 run();

@@ -1,10 +1,11 @@
 {
   "name": "bkz-ayaka",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Bakuzan's Function Library",
   "main": "index.js",
   "files": [
-    "build/"
+    "*",
+    "!*.tgz"
   ],
   "lint-staged": {
     "{,lib,tools,__tests__}/**/*.{ts,tsx,js,jsx,json}": [
@@ -27,12 +28,11 @@
     "test:watch": "npx jest -o --watch",
     "test:coverage": "npx jest --coverage",
     "build:bundle": "rollup -c",
-    "build:local": "tsc --build && node ./tools/postBuild.js --include-package-json",
-    "build:npm": "rmdir /s /q build && tsc --build && node ./tools/postBuild.js",
+    "build:local": "tsc --build && node ./tools/postBuild.js",
     "docs": "typedoc --out docs lib",
     "disable-jekyll": "touch ./docs/.nojekyll",
     "deploy": "rmdir /s /q docs && npm run docs && npm run disable-jekyll && gh-pages --dotfiles -d docs",
-    "prepublishOnly": "npm run build:npm"
+    "release": "npm run build:local && cd .\\build && npm publish && cd .."
   },
   "keywords": [
     "function library"
