@@ -1,7 +1,7 @@
-jest.mock('../lib', () => ({ generateUniqueId: jest.fn() }));
+jest.mock('../lib/generateUniqueId', () => ({ default: jest.fn() }));
 
+import generateUniqueId from '../lib/generateUniqueId';
 import Router, { Route } from '../lib/Router';
-import * as fns from '../lib';
 
 const DEFAULT_ROUTES = [
   {
@@ -29,7 +29,14 @@ function createRouter(routes: Route[] = [], baseUrl = '') {
 
 describe('Router', () => {
   // Hide console errors!
-  beforeAll(() => jest.spyOn(console, 'error').mockImplementation(() => null));
+  beforeAll(() => {
+    jest.spyOn(console, 'error').mockImplementation(() => null);
+    // Object.defineProperty(window, 'crypto', {
+    //   get() {
+    //     return { getRandomValues: jest.fn(() => [0]) };
+    //   }
+    // });
+  });
 
   beforeEach(() => jest.resetAllMocks());
 
@@ -77,7 +84,7 @@ describe('Router', () => {
     router.push('/unknown-route');
 
     expect(subMock).not.toHaveBeenCalled();
-    expect(fns.generateUniqueId).not.toHaveBeenCalled();
+    expect(generateUniqueId).not.toHaveBeenCalled();
   });
 
   it('should publish push changes', () => {
@@ -89,7 +96,7 @@ describe('Router', () => {
     router.push('/');
 
     expect(subMock).toHaveBeenCalled();
-    expect(fns.generateUniqueId).toHaveBeenCalled();
+    expect(generateUniqueId).toHaveBeenCalled();
   });
 
   it('should publish push changes adding base if no leading slash', () => {
@@ -103,7 +110,7 @@ describe('Router', () => {
     const result = subMock.mock.calls[0][0];
 
     expect(result.toRoute.url).toEqual('/options');
-    expect(fns.generateUniqueId).toHaveBeenCalled();
+    expect(generateUniqueId).toHaveBeenCalled();
   });
 
   it('should not publish onpopstate event changes of unknown route', () => {
@@ -123,7 +130,7 @@ describe('Router', () => {
     }
 
     expect(subMock).not.toHaveBeenCalled();
-    expect(fns.generateUniqueId).not.toHaveBeenCalled();
+    expect(generateUniqueId).not.toHaveBeenCalled();
   });
 
   it('should publish onpopstate event changes', () => {
@@ -137,7 +144,7 @@ describe('Router', () => {
     }
 
     expect(subMock).toHaveBeenCalled();
-    expect(fns.generateUniqueId).toHaveBeenCalled();
+    expect(generateUniqueId).toHaveBeenCalled();
   });
 
   it('should return baseurl for guarded path', () => {

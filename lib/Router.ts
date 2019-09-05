@@ -1,4 +1,4 @@
-import { generateUniqueId } from '@/index';
+import generateUniqueId from './generateUniqueId';
 
 export interface Route {
   name: string;
