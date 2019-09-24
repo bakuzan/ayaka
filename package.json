@@ -2,6 +2,10 @@
   "name": "bkz-ayaka",
   "version": "2.0.2",
   "description": "Bakuzan's Function Library",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bakuzan/ayaka.git"
+  },
   "main": "index.js",
   "files": [
     "*",
@@ -35,6 +39,7 @@
     "release": "npm run build:local && cd .\\build && npm publish && cd .."
   },
   "keywords": [
+    "typescript",
     "function library"
   ],
   "author": "bakuzan",
