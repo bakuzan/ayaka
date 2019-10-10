@@ -1,3 +1,4 @@
+export { default as adjustDateDay } from './adjustDateDay';
 export { default as adjustDateMonth } from './adjustDateMonth';
 export { default as adjustDateYear } from './adjustDateYear';
 export {
