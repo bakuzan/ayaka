@@ -9,6 +9,7 @@ export {
 } from './capitalise';
 export { default as castStringToBool } from './castStringToBool';
 export { default as checkIfDatePartsMatch } from './checkIfDatePartsMatch';
+export { default as chunk } from './chunk';
 export { default as compose } from './compose';
 export {
   default as constructObjectFromSearchParams
