@@ -12,7 +12,8 @@ const DEFAULT_ROUTES = [
   {
     name: 'options',
     render: () => 'render options',
-    url: '/options'
+    url: '/options',
+    title: 'options'
   },
   {
     name: 'scores',
@@ -21,21 +22,15 @@ const DEFAULT_ROUTES = [
   }
 ];
 
-function createRouter(routes: Route[] = [], baseUrl = '') {
+function createRouter(routes: Route[] = [], baseUrl = '', baseTitle = '') {
   const r = routes.length ? routes : DEFAULT_ROUTES;
-  const b = baseUrl ? baseUrl : undefined;
-  return new Router(r, b);
+  return new Router(r, { baseUrl, baseTitle });
 }
 
 describe('Router', () => {
   // Hide console errors!
   beforeAll(() => {
     jest.spyOn(console, 'error').mockImplementation(() => null);
-    // Object.defineProperty(window, 'crypto', {
-    //   get() {
-    //     return { getRandomValues: jest.fn(() => [0]) };
-    //   }
-    // });
   });
 
   beforeEach(() => jest.resetAllMocks());
@@ -87,22 +82,39 @@ describe('Router', () => {
     expect(generateUniqueId).not.toHaveBeenCalled();
   });
 
-  it('should publish push changes', () => {
+  it('should publish push changes - without base title', () => {
     const subMock = jest.fn();
+    const titleSpy = jest.spyOn(document, 'title', 'set');
 
-    const router = createRouter();
+    const router = createRouter(undefined, undefined, undefined);
 
     router.subscribe(subMock);
     router.push('/');
 
     expect(subMock).toHaveBeenCalled();
     expect(generateUniqueId).toHaveBeenCalled();
+    expect(titleSpy).not.toHaveBeenCalled();
+  });
+
+  it('should publish push changes - with base title', () => {
+    const subMock = jest.fn();
+    const titleSpy = jest.spyOn(document, 'title', 'set');
+
+    const router = createRouter(undefined, undefined, 'base');
+
+    router.subscribe(subMock);
+    router.push('/');
+
+    expect(subMock).toHaveBeenCalled();
+    expect(generateUniqueId).toHaveBeenCalled();
+    expect(titleSpy).toHaveBeenCalledWith('base');
   });
 
   it('should publish push changes adding base if no leading slash', () => {
     const subMock = jest.fn();
+    const titleSpy = jest.spyOn(document, 'title', 'set');
 
-    const router = createRouter();
+    const router = createRouter(undefined, undefined, 'base');
 
     router.subscribe(subMock);
     router.push('options');
@@ -111,6 +123,7 @@ describe('Router', () => {
 
     expect(result.toRoute.url).toEqual('/options');
     expect(generateUniqueId).toHaveBeenCalled();
+    expect(titleSpy).toHaveBeenCalledWith('options | base');
   });
 
   it('should not publish onpopstate event changes of unknown route', () => {
@@ -185,5 +198,14 @@ describe('Router', () => {
     router.push('options');
 
     expect(spyFn).not.toHaveBeenCalled();
+  });
+
+  it('should set page title', () => {
+    const titleSpy = jest.spyOn(document, 'title', 'set');
+
+    const router = createRouter();
+    router.setPageTitle('test');
+
+    expect(titleSpy).toHaveBeenCalledWith('test');
   });
 });

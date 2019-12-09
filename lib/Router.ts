@@ -1,7 +1,13 @@
 import generateUniqueId from './generateUniqueId';
 
+export interface RouterOptions {
+  baseUrl?: string;
+  baseTitle?: string;
+}
+
 export interface Route {
   name: string;
+  title?: string;
   url: string;
   render: (key: string) => any;
 }
@@ -15,11 +21,13 @@ export interface RouteUpdate {
 class Router {
   private appRoutes: Route[] = [];
   private baseUrl = '/';
+  private baseTitle = '';
   private listeners: Array<(update: RouteUpdate) => void> = [];
 
-  constructor(routes: Route[], baseUrl = '/') {
+  constructor(routes: Route[], opts: RouterOptions = {}) {
     this.appRoutes = routes;
-    this.baseUrl = baseUrl;
+    this.baseUrl = opts.baseUrl || '/';
+    this.baseTitle = opts.baseTitle || '';
 
     this.listenToPopState();
   }
@@ -63,6 +71,7 @@ class Router {
     const targetUrl = `${window.location.origin}${usableLocation}`;
 
     window.history.pushState(null, '', targetUrl);
+    this.setPageTitle(toRoute.title);
     this.publishChange(toRoute, fromRoute);
   }
 
@@ -76,6 +85,23 @@ class Router {
     p = p.startsWith('/') ? p : `/${p}`;
     p = p.endsWith('/') ? p.slice(0, -1) : p;
     return p || this.baseUrl;
+  }
+
+  public setPageTitle(title?: string) {
+    if (!title && !this.baseTitle) {
+      return;
+    }
+
+    let newTitle: string;
+    if (title && this.baseTitle) {
+      newTitle = `${title} | ${this.baseTitle}`;
+    } else if (!title) {
+      newTitle = this.baseTitle;
+    } else {
+      newTitle = title;
+    }
+
+    document.title = newTitle;
   }
 
   private listenToPopState() {
@@ -92,6 +118,7 @@ class Router {
         return;
       }
 
+      this.setPageTitle(toRoute.title);
       this.publishChange(toRoute);
     };
   }

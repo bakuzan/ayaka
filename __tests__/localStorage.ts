@@ -34,11 +34,36 @@ describe('Storage', () => {
   });
 
   // GetKey
-  it('should return key value for stored object', () => {
+  it('should return key value for defaults', () => {
+    const parseSpy = jest.spyOn(JSON, 'parse');
+
     const result = store.getKey('age');
 
     expect(result).toEqual(STORE_DEFAULTS.age);
     expect(localStorage.getItem).toHaveBeenCalledWith(STORE_KEY);
+    expect(parseSpy).not.toHaveBeenCalled();
+  });
+
+  it('should return key value for defaults when none in stored object', () => {
+    localStorage.setItem(STORE_KEY, '{ "name": "ayaka" }'); // Put some data in store
+    const parseSpy = jest.spyOn(JSON, 'parse');
+
+    const result = store.getKey('age');
+
+    expect(result).toEqual(STORE_DEFAULTS.age);
+    expect(localStorage.getItem).toHaveBeenCalledWith(STORE_KEY);
+    expect(parseSpy).toHaveBeenCalled();
+  });
+
+  it('should return key value for stored object', () => {
+    localStorage.setItem(STORE_KEY, '{ "age": 44 }'); // Put some data in store
+    const parseSpy = jest.spyOn(JSON, 'parse');
+
+    const result = store.getKey('age');
+
+    expect(result).toEqual(44);
+    expect(localStorage.getItem).toHaveBeenCalledWith(STORE_KEY);
+    expect(parseSpy).toHaveBeenCalled();
   });
 
   // Set
