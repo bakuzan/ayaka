@@ -11,31 +11,21 @@ export { default as castStringToBool } from './castStringToBool';
 export { default as checkIfDatePartsMatch } from './checkIfDatePartsMatch';
 export { default as chunk } from './chunk';
 export { default as compose } from './compose';
-export {
-  default as constructObjectFromSearchParams
-} from './constructObjectFromSearchParams';
+export { default as constructObjectFromSearchParams } from './constructObjectFromSearchParams';
 export { default as convertToBase64 } from './convertToBase64';
 export { default as createListeners } from './createListeners';
 export { default as curry } from './curry';
 export { default as dateAsMs } from './dateAsMs';
 export { default as datesAreEqual } from './datesAreEqual';
-export {
-  default as daysDifferenceBetweenDates
-} from './daysDifferenceBetweenDates';
-export {
-  default as daysDifferenceFromMonday
-} from './daysDifferenceFromMonday';
-export {
-  default as daysDifferenceFromSunday
-} from './daysDifferenceFromSunday';
+export { default as daysDifferenceBetweenDates } from './daysDifferenceBetweenDates';
+export { default as daysDifferenceFromMonday } from './daysDifferenceFromMonday';
+export { default as daysDifferenceFromSunday } from './daysDifferenceFromSunday';
 export { default as debounce } from './debounce';
 export { default as endOfDay } from './endOfDay';
 export { default as formatDateForDisplay } from './formatDateForDisplay';
 export { default as formatDateForInput } from './formatDateForInput';
 export { default as formatDateISO } from './formatDateISO';
-export {
-  default as formatDateTimeForDisplay
-} from './formatDateTimeForDisplay';
+export { default as formatDateTimeForDisplay } from './formatDateTimeForDisplay';
 export { default as formatTime } from './formatTime';
 export { default as fromCamelCase } from './fromCamelCase';
 export { default as guardEvent } from './guardEvent';
@@ -62,6 +52,7 @@ export { default as isObject } from './isObject';
 export { default as isTypeOf } from './isTypeOf';
 export { default as Store } from './localStorage';
 export { default as objectsAreEqual } from './objectsAreEqual';
+export { default as orderBy } from './orderBy';
 export { default as padNumber } from './padNumber';
 export { lighten, darken } from './palette';
 export { default as parseIfInt } from './parseIfInt';
