@@ -6,9 +6,15 @@ describe('constructObjectFromSearchParams', () => {
   it('should build object from url search string', () => {
     const expected = { name: 'ayaka', number: 1, isFemale: true };
 
-    const result = fns.constructObjectFromSearchParams(searchString);
+    const results = [
+      fns.constructObjectFromSearchParams(searchString),
+      fns.constructObjectFromSearchParams('name=ayaka&number=1&isFemale=true'),
+      fns.constructObjectFromSearchParams(
+        'http://domin.test?name=ayaka&number=1&isFemale=true'
+      )
+    ];
 
-    expect(result).toEqual(expected);
+    results.forEach((result) => expect(result).toEqual(expected));
   });
 
   it('should convert number params to numbers', () => {

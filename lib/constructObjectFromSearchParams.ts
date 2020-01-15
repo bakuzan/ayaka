@@ -14,7 +14,8 @@ interface KeyValueObject {
 
 const constructObjectFromSearchParams = (searchParam = ''): KeyValueObject =>
   searchParam
-    .slice(1)
+    .split('?')
+    .pop()
     .split('&')
     .reduce((p, c) => {
       const [key, raw] = c.split('=');
