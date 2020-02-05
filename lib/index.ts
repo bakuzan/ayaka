@@ -44,6 +44,7 @@ export { getTimeoutSeconds, getTimeoutMinutes } from './getTimeout';
 export { default as getWeekBeginning } from './getWeekBeginning';
 export { default as getWeekEnding } from './getWeekEnding';
 export { default as getWeekExtreme } from './getWeekExtreme';
+export { default as groupBy } from './groupBy';
 export { default as isArray } from './isArray';
 export { isBefore, isBeforeOrEqual } from './isBefore';
 export { default as isNumber } from './isNumber';
