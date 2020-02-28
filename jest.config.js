@@ -1,14 +1,14 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  modulePathIgnorePatterns: ['__tests__/utils/'],
-  coveragePathIgnorePatterns: ['__tests__/utils/'],
+  modulePathIgnorePatterns: ['__tests__/utils/', 'build/'],
+  coveragePathIgnorePatterns: ['__tests__/utils/', 'build/'],
   moduleFileExtensions: ['js', 'json', 'ts'],
   moduleDirectories: ['.', 'lib', 'node_modules'],
   transform: {
     '^.+\\.tsx?$': 'ts-jest'
   },
-  transformIgnorePatterns: ['/node_modules/'],
+  transformIgnorePatterns: ['/node_modules/', 'build/'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/lib/$1'
   }

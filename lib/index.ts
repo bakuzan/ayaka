@@ -39,6 +39,7 @@ export { default as getFirstDateOfMonth } from './getFirstDateOfMonth';
 export { default as getKeyByValue } from './getKeyByValue';
 export { default as getLastDateOfMonth } from './getLastDateOfMonth';
 export { default as getMonthName } from './getMonthName';
+export { default as getOrdinalSuffix } from './getOrdinalSuffix';
 export { default as getSingleObjectProperty } from './getSingleObjectProperty';
 export { getTimeoutSeconds, getTimeoutMinutes } from './getTimeout';
 export { default as getWeekBeginning } from './getWeekBeginning';

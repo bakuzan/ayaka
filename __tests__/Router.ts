@@ -1,7 +1,9 @@
-jest.mock('../lib/generateUniqueId', () => ({ default: jest.fn() }));
+jest.mock('../lib/generateUniqueId');
 
 import generateUniqueId from '../lib/generateUniqueId';
 import Router, { Route } from '../lib/Router';
+
+(generateUniqueId as any).mockImplementation(() => ({ default: jest.fn() }));
 
 const DEFAULT_ROUTES = [
   {
