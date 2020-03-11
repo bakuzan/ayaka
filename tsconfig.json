@@ -15,7 +15,7 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "target": "esnext",
+    "target": "es2019",
     "module": "esnext",
     "jsx": "react",
     "typeRoots": ["node_modules/@types"],
