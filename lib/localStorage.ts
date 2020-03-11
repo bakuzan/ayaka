@@ -11,7 +11,7 @@ export default class Store<T> {
   }
 
   private get storage() {
-    return typeof localStorage !== undefined
+    return typeof localStorage !== 'undefined'
       ? localStorage
       : {
           getItem: (key: string) => '',
