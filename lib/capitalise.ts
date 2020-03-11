@@ -10,10 +10,7 @@ export const capitaliseEachWord = (str: string): string =>
     .map(capitalise)
     .join(' ');
 
-export const separateAndCapitalise = compose(
-  capitalise,
-  fromCamelCase
-);
+export const separateAndCapitalise = compose(capitalise, fromCamelCase);
 
 export const separateAndCapitaliseAll = compose(
   capitaliseEachWord,

@@ -22,7 +22,7 @@ class Router {
   private appRoutes: Route[] = [];
   private baseUrl = '/';
   private baseTitle = '';
-  private listeners: Array<(update: RouteUpdate) => void> = [];
+  private listeners: ((update: RouteUpdate) => void)[] = [];
 
   constructor(routes: Route[], opts: RouterOptions = {}) {
     this.appRoutes = routes;
