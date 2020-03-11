@@ -34,8 +34,8 @@
     "docs": "typedoc --out docs lib",
     "disable-jekyll": "touch ./docs/.nojekyll",
     "deploy": "rmdir /s /q docs && npm run docs && npm run disable-jekyll && gh-pages --dotfiles -d docs",
-    "release:test": "npm run build:local && cd .\\build && npm pack && cd ..",
-    "release:npm": "npm run build:local && cd .\\build && npm publish && cd .."
+    "release:test": "npm run build && cd .\\build && npm pack && cd ..",
+    "release:npm": "npm run build && cd .\\build && npm publish && cd .."
   },
   "keywords": [
     "typescript",
