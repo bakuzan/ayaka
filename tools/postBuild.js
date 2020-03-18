@@ -21,9 +21,10 @@ async function copyRootFile(fileName) {
 }
 
 async function babelJS() {
-  await execa.shell(
+  await execa.command(
     `npx babel ${buildFolder} --out-dir ${buildFolder} --extensions=.js --presets @babel/preset-env --source-maps --env-name "build"`,
     {
+      shell: true,
       stdio: ['pipe', 'pipe', 'inherit']
     }
   );
