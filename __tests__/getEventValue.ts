@@ -18,6 +18,19 @@ describe('getEventValue', () => {
     results.forEach((result) => expect(result).toEqual(expected));
   });
 
+  it('should return value for url input even if it includes a number', () => {
+    const customTarget = {
+      value: 'https://test.com/1/345678',
+      checked: true
+    };
+
+    const expected = customTarget.value;
+
+    const result = fns.getEventValue({ ...customTarget, type: 'url' });
+
+    expect(result).toEqual(expected);
+  });
+
   it('should return checked for checkbox inputs', () => {
     const expected = target.checked;
 

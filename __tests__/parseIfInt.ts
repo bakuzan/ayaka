@@ -56,4 +56,12 @@ describe('parseIfInt', () => {
 
     expect(result).toEqual(expected);
   });
+
+  it('should return input if empty string', () => {
+    const expected = '';
+
+    const result = fns.parseIfInt('');
+
+    expect(result).toEqual(expected);
+  });
 });

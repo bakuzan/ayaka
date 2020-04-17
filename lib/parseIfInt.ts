@@ -4,5 +4,6 @@ export default function parseIfInt(val: string): string | number {
     return val;
   }
 
-  return parseInt(val, 10);
+  const num = parseInt(val, 10);
+  return isNaN(num) ? val : num;
 }
