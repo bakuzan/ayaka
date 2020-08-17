@@ -10,7 +10,7 @@ export default class Store<T> {
     this.defaultValue = defaultValue;
   }
 
-  private get storage() {
+  private get storage(): Partial<Storage> {
     return typeof localStorage !== 'undefined'
       ? localStorage
       : {
@@ -26,7 +26,7 @@ export default class Store<T> {
     return { ...this.defaultValue, ...data };
   }
 
-  public getKey<K extends keyof T>(key: K) {
+  public getKey<K extends keyof T>(key: K): T[K] {
     const item = this.storage.getItem(this.storeName) || '';
     const data = (item ? JSON.parse(item) : this.defaultValue) as T;
 
