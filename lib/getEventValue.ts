@@ -1,3 +1,4 @@
+/* eslint-disable id-denylist */
 import parseIfInt from './parseIfInt';
 
 enum InputTypes {

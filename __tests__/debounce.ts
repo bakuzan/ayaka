@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import * as fns from '../lib';
 
 describe('debounce', () => {
-  let result = null;
+  let result: number | null = null;
 
   function checkTimeoutCalled() {
     expect(setTimeout).toHaveBeenCalledTimes(1);
@@ -10,10 +11,12 @@ describe('debounce', () => {
 
   beforeEach(() => {
     jest.useFakeTimers();
+    jest.spyOn(global, 'setTimeout');
   });
 
   afterEach(() => {
-    jest.clearAllTimers();
+    jest.runOnlyPendingTimers();
+    jest.useRealTimers();
   });
 
   it('should return timeout id', () => {

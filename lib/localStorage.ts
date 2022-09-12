@@ -1,4 +1,5 @@
-/* tslint:disable:no-empty */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { prop } from './helpers/prop';
 
 export default class Store<T> {
@@ -43,7 +44,7 @@ export default class Store<T> {
   public replace(newValue: T): T {
     const data = JSON.stringify(newValue);
     this.storage.setItem(this.storeName, data);
-    return this.get() as T;
+    return this.get();
   }
 
   public upgrade(...upgradeFns: ((data: Partial<T>) => Partial<T>)[]) {

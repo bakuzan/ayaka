@@ -4,7 +4,7 @@ module.exports = {
   modulePathIgnorePatterns: ['__tests__/utils/', 'build/'],
   coveragePathIgnorePatterns: ['__tests__/utils/', 'build/'],
   moduleFileExtensions: ['js', 'json', 'ts'],
-  moduleDirectories: ['.', 'lib', 'node_modules'],
+  moduleDirectories: [__dirname, 'lib', 'node_modules'],
   transform: {
     '^.+\\.tsx?$': 'ts-jest'
   },
